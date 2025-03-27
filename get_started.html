@@ -1,63 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Face Recognition Attendance</title>
-    <link rel="stylesheet" href="styles_main_page.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <nav style="justify-content: space-between">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AttendanceAI - Smart Attendance Tracking</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles_main_page.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- Navigation Bar Items -->
+    <nav>
+      <div class="nav-wrapper">
         <div class="home">
-          <a href="index1.html">AttendanceAI</a>
+          <a href="index1.html" class="logo">AttendanceAI</a>
         </div>
-        <div class="links">
-          <a href="">Home</a>
-          <a href="#selectinput">Select Input Method</a>
-          <a href="#checkattendance">Check Attendance</a>
-        </div>
-      </nav>
-      <div class="topimg">
-        <img src="web_images/6.png" alt="" />
-      </div>
-      <div class="entermethod" id="selectinput">
-        <div class="buttonclass">
-          <h3>Enter a Method to take the attendance</h3>
-          <div class="buttons">
-            <button>Turn On Camera</button>
-            <button>Upload an Image(s)</button>
-          </div>
-        </div>
-        <img src="web_images/7.png" />
-      </div>
-      <div class="checkattendance" id="checkattendance">
-        <div class="left">
-          <img src="web_images/8.jpeg" />
-        </div>
-        <div class="right">
-          <h3>Enter the details to check attendance</h3>
-          <div class="datepicking">
-            <label for="datepicking">Enter the Date :</label>
-            <input type="date" placeholder="Enter the date" />
-          </div>
-          <div class="fromtimepicking">
-            <label for="fromtimepicking">Enter the From Time:</label>
-            <input type="time" name="" id="" />
-          </div>
-          <div class="totimepicking">
-            <label for="totimepicking">Enter the To Time :</label>
-            <input type="time" name="" id="" />
-          </div>
-          <button>Submit</button>
+        <div class="nav-links">
+          <a href="index1.html">Home</a>
+          <a href="#selectinput">Take Attendance</a>
+          <a href="#checkattendance">Check Records</a>
         </div>
       </div>
-      <div class="results"></div>
+    </nav>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero" id="home">
+        <!-- Hero Content Section -->
+        <div class="hero-content">
+          <h1>Intelligent Attendance Tracking</h1>
+          <p>Seamless face recognition technology for modern educational institutions</p>
+          <div class="hero-cta">
+            <a href="#selectinput" class="btn btn-primary">Get Started</a>
+            <a href="#howitworks" class="btn btn-secondary">Learn More</a>
+          </div>
+        </div>
+        <!-- Hero Image section -->
+        <div class="hero-image">
+          <img src="web_images/5.png" alt="Attendance Tracking Illustration" />
+        </div>
+      </section>
+
+      <!-- Attendance Methods Section -->
+      <section class="attendance-methods" id="selectinput">
+        <div class="section-header">
+          <h2>Choose Attendance Method</h2>
+          <p>Select how you want to track student attendance</p>
+        </div>
+        <!-- Methods Section -->
+        <div class="method-selection">
+          <div class="method-card">
+            <i class="fas fa-camera"></i>
+            <h3>Live Camera</h3>
+            <button class="btn btn-outline">Turn On Camera</button>
+          </div>
+          <div class="method-card">
+            <i class="fas fa-upload"></i>
+            <h3>Image Upload</h3>
+            <button class="btn btn-outline">Upload an Image(s)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Attendance Records Checking Section -->
+      <section class="attendance-check" id="checkattendance">
+        <div class="section-header">
+          <h2>Attendance Records</h2>
+          <p>Retrieve attendance information for specific sessions</p>
+        </div>
+        <!-- Grid section to choose date and time -->
+        <div class="attendance-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="datepicking">Date</label>
+              <input type="date" id="datepicking" class="form-control" />
+            </div>
+            <div class="form-group time-group">
+              <label for="fromtimepicking">From Time</label>
+              <div class="time-input-wrapper">
+                <input type="time" id="fromtimepicking" class="form-control" />
+              </div>
+            </div>
+            <div class="form-group time-group">
+              <label for="totimepicking">To Time</label>
+              <div class="time-input-wrapper">
+                <input type="time" id="totimepicking" class="form-control" />
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary btn-submit">Check Attendance</button>
+            <button class="btn btn-clear">Clear Results</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; <span id="year"></span> AttendanceAI. All rights reserved.</p>
     </div>
-    <script src="script1.js"></script>
-  </body>
+  </footer>
+
+  <script src="script1.js"></script>
+</body>
+
 </html>
