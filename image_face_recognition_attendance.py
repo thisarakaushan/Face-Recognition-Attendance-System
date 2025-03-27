@@ -3,6 +3,10 @@ import face_recognition
 import os
 from datetime import datetime
 import sys
+from attendance_tracker import AttendanceTracker
+
+# Initialize the attendance tracker
+tracker = AttendanceTracker()
 
 def find_encodings(images):
     encode_list = []
@@ -13,11 +17,8 @@ def find_encodings(images):
     return encode_list
 
 def mark_attendance(name):
-    with open('Attendance.csv', 'a') as f:
-        now = datetime.now()
-        date = datetime.today().strftime('%d/%m/%Y')
-        dt_string = now.strftime('%H:%M:%S')
-        f.write(f'{name},{date},{dt_string}\n')
+    # Use the new attendance tracker method
+    tracker.mark_attendance(name)
 
 def recognize_faces(image_path, known_encodings, known_names):
     img = cv2.imread(image_path)
