@@ -31,26 +31,46 @@ class AttendanceTracker:
         directory = os.path.dirname(self.csv_file)
         if directory and not os.path.exists(directory):
             os.makedirs(directory)
+            print(f"Created directory: {directory}")
 
         # Check if file exists, if not create it
         if not os.path.exists(self.csv_file):
+            print(f"CSV file doesn't exist. Creating: {self.csv_file}")
             df = pd.DataFrame(columns=self.REQUIRED_COLUMNS)
             df.to_csv(self.csv_file, index=False)
+            print(f"CSV file created with columns: {self.REQUIRED_COLUMNS}")
+        else:
+            # Check if the file is empty or has the wrong structure
+            try:
+                df = pd.read_csv(self.csv_file)
+                print(f"CSV file exists with columns: {list(df.columns)}")
+            except pd.errors.EmptyDataError:
+                print(f"CSV file exists but is empty. Recreating with proper structure.")
+                df = pd.DataFrame(columns=self.REQUIRED_COLUMNS)
+                df.to_csv(self.csv_file, index=False)
 
     def mark_attendance(self, name):
         """
         Mark attendance with multiple time entries tracking.
         Preserves existing records and adds new entries.
         """
+        # First, ensure the CSV file exists with headers
+        self.create_csv_if_not_exists()
+    
         # Read existing CSV file
         try:
             # Use dtype=str to ensure all columns are read as strings
             df = pd.read_csv(self.csv_file, dtype=str)  
+        except pd.errors.EmptyDataError:
+            print("CSV file exists but is empty. Creating proper structure.")
+            # Create a fresh DataFrame with the required columns
+            df = pd.DataFrame(columns=self.REQUIRED_COLUMNS)
+            df.to_csv(self.csv_file, index=False)
         except Exception as e:
             print(f"Error reading CSV: {e}")
-            # Recreate the CSV if there's an error
-            self.create_csv_if_not_exists()
-            df = pd.read_csv(self.csv_file, dtype=str)
+            # Recreate the CSV with proper structure
+            df = pd.DataFrame(columns=self.REQUIRED_COLUMNS)
+            df.to_csv(self.csv_file, index=False)
 
         # Get current date and time
         now = datetime.now()
