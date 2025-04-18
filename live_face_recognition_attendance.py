@@ -89,7 +89,9 @@ def run_face_recognition():
                         matchIndex = min(range(len(faceDis)), key=faceDis.__getitem__)
 
                         # Authorized person (known face)
-                        if matches[matchIndex]:
+                        # Add this confidence threshold check (smaller distance = better match)
+                        # Only accept as a match if the distance is below 0.5 (adjust this threshold as needed)
+                        if matches[matchIndex] and faceDis[matchIndex] < 0.5:
                             name = classNames[matchIndex].upper()
                             recognized_people.append((name, faceLoc))
                             
@@ -108,6 +110,7 @@ def run_face_recognition():
                         
                         # Unauthorized person (unknown face)
                         else:
+                            # Face didn't meet confidence threshold, mark as unknown
                             unauthorized_faces.append(faceLoc)
 
                 # Draw rectangles for recognized people (green)
